@@ -1,21 +1,29 @@
 #include <iostream>
+#include<ctime>
 using namespace std;
 
 void displayRuns(int values[], int size);
 bool hasRun(int values[], int size);
 
 int main() {
-    int rolls[] = { 1, 1, 2, 3, 3, 3, 4, 4, 4, 4, 5, 6, 6, 6, 6, 6, 5, 5, 5, 5 };
+   
+    srand(time(NULL));
+    int rolls[20];
     int SIZE = 20;
 
-    cout << "runs: ";
-    displayRuns(rolls, SIZE);
+    for (int i = 0; i < SIZE; ++i) {
+        rolls[i] = rand() % 6 + 1;
+    }
 
     if (hasRun(rolls, SIZE)) {
-        cout << "The array has 1 or more runs." << endl;
+        cout << "has run: ";
+        displayRuns(rolls, SIZE);
+        cout << endl;
     }
     else {
-        cout << "The array does not have a run." << endl;
+        cout << "no run: ";
+        displayRuns(rolls, SIZE);
+        cout << endl;
     }
 }
 
