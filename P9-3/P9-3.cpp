@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-void displayRuns(const int rolls[], int size);
+void displayRuns(int values[], int size);
+bool hasRun(int values[], int size);
 
 int main() {
     int rolls[] = { 1, 1, 2, 3, 3, 3, 4, 4, 4, 4, 5, 6, 6, 6, 6, 6, 5, 5, 5, 5 };
@@ -9,18 +10,25 @@ int main() {
 
     cout << "runs: ";
     displayRuns(rolls, SIZE);
+
+    if (hasRun(rolls, SIZE)) {
+        cout << "The array has 1 or more runs." << endl;
+    }
+    else {
+        cout << "The array does not have a run." << endl;
+    }
 }
 
-void displayRuns(const int rolls[], int size) {
+void displayRuns(int values[] , int size) {
     bool inRun = false;
     int startOfRun = 0;
 
     for (int i = 1; i <= size; ++i) {
-        if (i == size || rolls[i] != rolls[i - 1]) {
+        if (i == size || values[i] != values[i - 1]) {
             if (inRun) {
                 cout << "(";
                 for (int j = startOfRun; j < i; ++j) {
-                    cout << rolls[j];
+                    cout << values[j];
                     if (j != i - 1) {
                         cout << " ";
                     }
@@ -32,7 +40,7 @@ void displayRuns(const int rolls[], int size) {
                 inRun = false;
             }
             else {
-                cout << rolls[i - 1];
+                cout << values[i - 1];
                 if (i != size) {
                     cout << " ";
                 }
@@ -46,4 +54,13 @@ void displayRuns(const int rolls[], int size) {
         }
     }
     cout << endl;
+}
+
+bool hasRun(int values[], int size) {
+    for (int i = 1; i < size; ++i) {
+        if (values[i] == values[i - 1]) {
+            return true;
+        }
+    }
+    return false;
 }
